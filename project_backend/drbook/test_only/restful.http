@@ -1,0 +1,89 @@
+### DOCTOR: Create New Profile ###
+#this is the sample json format
+POST http://127.0.0.1:8000/api/doctors
+Content-Type: application/json
+
+{
+    "username": "nurseA",
+    "password": "nurseA",
+    "name": "",
+    "branch": "",
+    "speciality": "",
+    "work_email": "doctorA@newEmail.com"
+}
+
+### DOCTOR: Get New Access/ Refresh Token ###
+#this is for jwt token, access token expired i set at 30m, refresh token i set it at 1 day
+#all service is access with access token as bearer
+#at rest api return you will get something like this:
+#"refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDQzNTU5MSwiaWF0IjoxNzUwMzQ5MTkxLCJqdGkiOiJmNmMzZDBhMzJjY2Y0YThhYTFhMjNhMmViNTc4Nzg3ZSIsInVzZXJfaWQiOjJ9.XNiuLIMZQ1sQZrf5w1tBTH1U4EFNL7SZrARzNJlqtr4",
+#"access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0"
+POST http://127.0.0.1:8000/api/token/
+Content-Type: application/json
+
+{
+    "username": "nurseA",
+    "password": "nurseA"
+}
+
+### use this to get new access token if access token expired
+#you put refresh token in, and get a new access token
+POST http://127.0.0.1:8000/api/token/refresh/
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDQzNTU5MSwiaWF0IjoxNzUwMzQ5MTkxLCJqdGkiOiJmNmMzZDBhMzJjY2Y0YThhYTFhMjNhMmViNTc4Nzg3ZSIsInVzZXJfaWQiOjJ9.XNiuLIMZQ1sQZrf5w1tBTH1U4EFNL7SZrARzNJlqtr4"
+}
+
+### DOCTOR: Check ID, Update ###
+#you need to include access token above
+GET http://127.0.0.1:8000/api/doctors/myself
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
+
+### and Update it after READ ###
+PATCH http://127.0.0.1:8000/api/doctors/myself/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
+
+{
+    "password": "NursePassword",
+    "work_email": "nurse@nurse.com",
+    "name": "NurseA",
+    "branch": "Main Branch Hospital",
+    "speciality": "General Nurse"
+}
+
+### DOCTOR: Check All Patients from a Doctor ###
+GET http://127.0.0.1:8000/api/patients/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
+
+### PATIENT: Create ###
+#simple create without details, but not recommend, 
+#it will crash your frontend somewhere when reading in future
+POST http://127.0.0.1:8000/api/patients/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
+
+{
+    "name": "James Blue"
+}
+
+### PATIENT: Create With FULL DATA ###
+#suggest you do it like this
+#you can get the doctor id from "DOCTOR: Check ID, Update" above
+POST http://127.0.0.1:8000/api/patients/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
+
+{
+    "name": "Frank Tint",
+    "patient_details": "Patient reports mild seasonal allergies, otherwise healthy. Follow-up in 6 months.",
+    "doctors": [2]
+}
+
+### PATIENT: All Doctor that deal with this patient ###
+GET http://127.0.0.1:8000/api/patients/4/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
