@@ -1,15 +1,15 @@
 ### DOCTOR: Create New Profile ###
 #this is the sample json format
-POST http://127.0.0.1:8000/api/doctors
+POST http://codices-divinum.com:81/api/doctors/
 Content-Type: application/json
 
 {
-    "username": "nurseA",
-    "password": "nurseA",
+    "username": "doctorA",
+    "password": "doctorA",
     "name": "",
     "branch": "",
     "speciality": "",
-    "work_email": "doctorA@newEmail.com"
+    "work_email": "docA@doctorA.com"
 }
 
 ### DOCTOR: Get New Access/ Refresh Token ###
@@ -18,17 +18,18 @@ Content-Type: application/json
 #at rest api return you will get something like this:
 #"refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDQzNTU5MSwiaWF0IjoxNzUwMzQ5MTkxLCJqdGkiOiJmNmMzZDBhMzJjY2Y0YThhYTFhMjNhMmViNTc4Nzg3ZSIsInVzZXJfaWQiOjJ9.XNiuLIMZQ1sQZrf5w1tBTH1U4EFNL7SZrARzNJlqtr4",
 #"access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0"
-POST http://127.0.0.1:8000/api/token/
+
+POST http://codices-divinum.com:81/api/token/
 Content-Type: application/json
 
 {
-    "username": "nurseA",
-    "password": "nurseA"
+    "username": "doctorA",
+    "password": "doctorA"
 }
 
 ### use this to get new access token if access token expired
 #you put refresh token in, and get a new access token
-POST http://127.0.0.1:8000/api/token/refresh/
+POST http://codices-divinum.com:81/api/token/refresh/
 Content-Type: application/json
 
 {
@@ -37,53 +38,61 @@ Content-Type: application/json
 
 ### DOCTOR: Check ID, Update ###
 #you need to include access token above
-GET http://127.0.0.1:8000/api/doctors/myself
+GET http://codices-divinum.com:81/api/doctors/myself/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzYyODA4LCJpYXQiOjE3NTAzNjEwMDgsImp0aSI6ImIwZDM4MmE1ZDFlMTRkMjE4OGYwOTEzMjdiMzJmMjk3IiwidXNlcl9pZCI6NX0.in_aK487utL9wt7woRuEmLpxsUnuxNNN-ipkyXuL6hA
 
 ### and Update it after READ ###
-PATCH http://127.0.0.1:8000/api/doctors/myself/
+PATCH http://codices-divinum.com:81/api/doctors/myself/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
 
 {
-    "password": "NursePassword",
-    "work_email": "nurse@nurse.com",
-    "name": "NurseA",
+    "password": "doctorAPassword",
+    "work_email": "doctorA@doctorA.com",
+    "name": "doctor Crazy",
     "branch": "Main Branch Hospital",
-    "speciality": "General Nurse"
+    "speciality": "General Doctor"
 }
 
 ### DOCTOR: Check All Patients from a Doctor ###
-GET http://127.0.0.1:8000/api/patients/
+GET http://codices-divinum.com:81/api/patients/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
 
 ### PATIENT: Create ###
 #simple create without details, but not recommend, 
 #it will crash your frontend somewhere when reading in future
-POST http://127.0.0.1:8000/api/patients/
+POST http://codices-divinum.com:81/api/patients/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
 
 {
-    "name": "James Blue"
+    "name": "James Bond"
 }
 
 ### PATIENT: Create With FULL DATA ###
 #suggest you do it like this
+#doctors: [doctor_id_here]
 #you can get the doctor id from "DOCTOR: Check ID, Update" above
-POST http://127.0.0.1:8000/api/patients/
+POST http://codices-divinum.com:81/api/patients/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzY1NjQwLCJpYXQiOjE3NTAzNjM4NDAsImp0aSI6ImEwOWVkNDBjNzMzMTRkZTY4M2Y5ZGE0NGJkYTJmYjBmIiwidXNlcl9pZCI6MX0.GT4qXuUwALT1RA7H-wmc75XDMxR0cvcbkEj8-He5Z3M
+
+{
+    "name": "Cloud Tester",
+    "patient_details": "Patient reports mild seasonal allergies, otherwise healthy. Attention needed",
+    "doctors": [1]
+}
+
+### PATIENT: show all patient ###
+GET http://codices-divinum.com:81/api/patients/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
 
-{
-    "name": "Frank Tint",
-    "patient_details": "Patient reports mild seasonal allergies, otherwise healthy. Follow-up in 6 months.",
-    "doctors": [2]
-}
 
-### PATIENT: All Doctor that deal with this patient ###
-GET http://127.0.0.1:8000/api/patients/4/
+
+### PATIENT: All Doctor that deal with this patient of id 4 ###
+GET http://codices-divinum.com:81/api/patients/4/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0

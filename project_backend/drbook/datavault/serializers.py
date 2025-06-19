@@ -15,28 +15,28 @@ class DoctorsSerializers(serializers.ModelSerializer):
         source="doctor_profile.name",
         default= "Annonymous_Doctor",
         required= False,
-        allow_null= True,
+        allow_null= False,
         allow_blank= True
     )
     branch = serializers.CharField(
         source="doctor_profile.branch",
         default= "The_Great_Gaa_Hospital",
         required= False,
-        allow_null= True,
+        allow_null= False,
         allow_blank= True
     )
     speciality = serializers.CharField(
         source="doctor_profile.speciality",
         default= "General Practitioner",
         required= False,
-        allow_null= True,
+        allow_null= False,
         allow_blank= True
     )
     work_email = serializers.EmailField(
         source="doctor_profile.work_email",
         default= "incoming@codices-divinum.com",
         required= False,
-        allow_null= True,
+        allow_null= False,
         allow_blank= True
     )
 
@@ -48,11 +48,15 @@ class DoctorsSerializers(serializers.ModelSerializer):
         username = validated_data['username']
         password = validated_data['password']
 
-        profile_name = validated_data.get('name') 
-        profile_work_email = validated_data.get('work_email')
-        profile_branch = validated_data.get('branch')
-        profile_speciality = validated_data.get('speciality')
+        profile_data = validated_data.pop("doctor_profile", {})
 
+        profile_name = profile_data.get('name') 
+        profile_work_email = profile_data.get('work_email')
+        profile_branch = profile_data.get('branch')
+        profile_speciality = profile_data.get('speciality')
+
+        print(f"validate_data.get():{validated_data.get('name'), validated_data.get('work_email'), validated_data.get('branch'), validated_data.get('speciality')}")
+        print(f"Sec2:{profile_name, profile_work_email, profile_branch, profile_speciality}")
         validated_data.pop('name', None) 
         validated_data.pop('branch', None)
         validated_data.pop('speciality', None)
