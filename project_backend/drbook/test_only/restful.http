@@ -4,12 +4,12 @@ POST http://codices-divinum.com:81/api/doctors/
 Content-Type: application/json
 
 {
-    "username": "doctorA",
-    "password": "doctorA",
+    "username": "system0",
+    "password": "system0",
     "name": "",
     "branch": "",
     "speciality": "",
-    "work_email": "docA@doctorA.com"
+    "work_email": "incoming@codices-divinum.com"
 }
 
 ### DOCTOR: Get New Access/ Refresh Token ###
@@ -23,8 +23,8 @@ POST http://codices-divinum.com:81/api/token/
 Content-Type: application/json
 
 {
-    "username": "doctorA",
-    "password": "doctorA"
+    "username": "system0",
+    "password": "system0"
 }
 
 ### use this to get new access token if access token expired
@@ -40,7 +40,7 @@ Content-Type: application/json
 #you need to include access token above
 GET http://codices-divinum.com:81/api/doctors/myself/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzYyODA4LCJpYXQiOjE3NTAzNjEwMDgsImp0aSI6ImIwZDM4MmE1ZDFlMTRkMjE4OGYwOTEzMjdiMzJmMjk3IiwidXNlcl9pZCI6NX0.in_aK487utL9wt7woRuEmLpxsUnuxNNN-ipkyXuL6hA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzY2NjAxLCJpYXQiOjE3NTAzNjQ4MDEsImp0aSI6IjVkZDAxM2E4Y2VhNzQ4ZWU5YTQ3M2ExMGU0YWY1YThkIiwidXNlcl9pZCI6MX0.gvJD4S7UKiq30hGPVozgC4ZilTF-xmf49NxQIlqT_dg
 
 ### and Update it after READ ###
 PATCH http://codices-divinum.com:81/api/doctors/myself/
@@ -77,7 +77,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 #you can get the doctor id from "DOCTOR: Check ID, Update" above
 POST http://codices-divinum.com:81/api/patients/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzY1NjQwLCJpYXQiOjE3NTAzNjM4NDAsImp0aSI6ImEwOWVkNDBjNzMzMTRkZTY4M2Y5ZGE0NGJkYTJmYjBmIiwidXNlcl9pZCI6MX0.GT4qXuUwALT1RA7H-wmc75XDMxR0cvcbkEj8-He5Z3M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzY2NjAxLCJpYXQiOjE3NTAzNjQ4MDEsImp0aSI6IjVkZDAxM2E4Y2VhNzQ4ZWU5YTQ3M2ExMGU0YWY1YThkIiwidXNlcl9pZCI6MX0.gvJD4S7UKiq30hGPVozgC4ZilTF-xmf49NxQIlqT_dg
 
 {
     "name": "Cloud Tester",
@@ -88,7 +88,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 ### PATIENT: show all patient ###
 GET http://codices-divinum.com:81/api/patients/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzUwOTkxLCJpYXQiOjE3NTAzNDkxOTEsImp0aSI6IjYwMjhiYTQ3NzYzYTRkMTBhMjUyNjAzOTExN2M2NmE0IiwidXNlcl9pZCI6Mn0.scBtUsepebr0mhioK0C9NSXCWez5v9tMOXB0jWjsRB0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzY2NjAxLCJpYXQiOjE3NTAzNjQ4MDEsImp0aSI6IjVkZDAxM2E4Y2VhNzQ4ZWU5YTQ3M2ExMGU0YWY1YThkIiwidXNlcl9pZCI6MX0.gvJD4S7UKiq30hGPVozgC4ZilTF-xmf49NxQIlqT_dg
 
 
 
