@@ -55,8 +55,7 @@ class DoctorsSerializers(serializers.ModelSerializer):
         profile_branch = profile_data.get('branch')
         profile_speciality = profile_data.get('speciality')
 
-        print(f"validate_data.get():{validated_data.get('name'), validated_data.get('work_email'), validated_data.get('branch'), validated_data.get('speciality')}")
-        print(f"Sec2:{profile_name, profile_work_email, profile_branch, profile_speciality}")
+        print(f"New Doctor Created:{profile_name, profile_branch, profile_speciality}")
         validated_data.pop('name', None) 
         validated_data.pop('branch', None)
         validated_data.pop('speciality', None)
