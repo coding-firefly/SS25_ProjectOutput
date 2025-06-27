@@ -34,7 +34,7 @@ class PatientProfile(models.Model):
 
     def __str__(self):
         doctor_names = ", ".join([d.name for d in self.doctors.all()])
-        return f"Patient {self.name} in charge by Doctors: {doctor_names if doctor_names else "None Assign Yet"}"
+        return f"Patient {self.name} in charge by Doctors: {doctor_names if doctor_names else 'None Assign Yet'}"
     
     def details(self):
         return [self.name, self.doctors.all]

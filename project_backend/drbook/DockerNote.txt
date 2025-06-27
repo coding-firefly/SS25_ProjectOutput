@@ -1,0 +1,36 @@
+FROM python:3.10-slim-buster
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    default-libmysqlclient-dev \
+    postgresql-client \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+#MUST for postgre!
+#python3-dev \
+#default-libmysqlclient-dev \
+#pkg-config \
+
+COPY requirements.txt /app/
+
+RUN pip install --no-cache-dir -r requirements.txt
+#mysqlclient==2.2.7 and psycopg2-binary==2.9.10 cant be include in docker installation currently
+
+COPY . /app/
+
+ENV DJANGO_SETTINGS_MODULE=drbook.settings \
+    PYTHONUNBUFFERED=1
+
+EXPOSE 8000
+
+#use custom entrypoint script to handle migration with Docker Compose instead?
+RUN python3 manage.py migrate
+
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
+#WSGI
+#CMD ["gunicorn", "--bind", "0.0.0.0:8000", "your_project_name.wsgi"]
