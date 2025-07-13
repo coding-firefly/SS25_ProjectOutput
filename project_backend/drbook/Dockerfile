@@ -17,10 +17,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libtool \
     && rm -rf /var/lib/apt/lists/*
 
-ENV SQLITE_VERSION=3.46.0 # Use a very recent stable version, e.g., from sqlite.org/download.html
-ENV SQLITE_TARBALL=sqlite-autoconf-${SQLITE_VERSION//./}00.tar.gz # This filename pattern is generally correct
+ENV SQLITE_VERSION=3.46.0 
+ENV SQLITE_TARBALL=sqlite-autoconf-${SQLITE_VERSION//./}00.tar.gz 
 
-ENV LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH" # Ensure Python finds the new SQLite
+ENV LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH" 
 
 WORKDIR /tmp
 RUN curl -fsSL https://www.sqlite.org/src/$SQLITE_TARBALL -o $SQLITE_TARBALL && \
