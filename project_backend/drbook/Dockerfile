@@ -4,6 +4,9 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    libreadline-dev \
+    wget \
+    tar \
     libpq-dev \
     python3-dev \
     postgresql-client \
@@ -11,6 +14,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
     gcc \
     && rm -rf /var/lib/apt/lists/*
+
+#SQLite update test
+ENV SQLITE_VERSION 3.50.2
+ENV SQLITE_TARBALL sqlite-autoconf-${SQLITE_VERSION//./}00.tar.gz
+
+WORKDIR /tmp
+RUN wget https://www.sqlite.org/2025/$SQLITE_TARBALL && \
+    tar -xvf $SQLITE_TARBALL && \
+    cd sqlite-autoconf-${SQLITE_VERSION//./}00 && \
+    ./configure --prefix=/usr/local && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig && \
+    rm -rf /tmp/sqlite-autoconf* /tmp/$SQLITE_TARBALL
+
+#End of SQlite update
 
 COPY req.txt /app/
 
